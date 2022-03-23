@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import { Home } from "./Home";
+
 const Router = () => {
     return (
         <BrowserRouter>
@@ -13,10 +15,6 @@ const Router = () => {
             </Routes>
         </BrowserRouter>
     );
-}
-
-function Home() {
-    return <h2>Home</h2>;
 }
 
 function About() {
