@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Home } from "./Home";
+import { Error } from "./Error";
 
 const Router = () => {
     return (
@@ -23,10 +24,6 @@ function About() {
 
 function Users() {
     return <h2>Users</h2>;
-}
-
-function Error() {
-    return <h2>Erro</h2>;
 }
 
 export { Router };
