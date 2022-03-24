@@ -2,11 +2,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Home } from "./Home";
 import { Error } from "./Error";
+import { Header } from "../components/Header";
 
 const Router = () => {
     return (
         <BrowserRouter>
-            {/* Header fixo ficará aqui */}
+            <Header />
 
             <Routes>
                 <Route path="/" element={<Home />} />

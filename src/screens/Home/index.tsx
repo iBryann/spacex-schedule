@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import spacex from "../../api/spacex";
 import { ILaunch } from "../../utils/interfaces";
 
-import { Container } from "./style";
+import { Style } from "./style";
 
 export const Home = () => {
     const [launches, setLaunches] = useState<ILaunch[]>([] as ILaunch[]);
@@ -14,13 +14,16 @@ export const Home = () => {
     }, []);
     
     return (
-        <Container>
-            Home
+        <div>
+            <Style />
 
+            Home
+            
             {
-                launches.slice(30, 40).map(launch =><LaunchCard launch={launch} key={launch.id} />)
+            // launches.slice(30, 40).map(launch =><LaunchCard launch={launch} key={launch.id} />)
             }
-        </Container>
+        
+        </div>
     );
 };
 
@@ -30,7 +33,7 @@ const LaunchCard = ({launch}: {launch: ILaunch}) => (
         <h3>{ launch.details }</h3>
 
         <div>
-            {launch.links.flickr.original.map(link => 
+            {launch.links.flickr.original.slice(0,1).map(link => 
                 <img
                     src={link}
                     style={{width: 300}}
