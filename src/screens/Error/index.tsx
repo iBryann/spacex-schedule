@@ -13,8 +13,6 @@ const Error = () => {
         navigate('/', { state: {nome: 'bryann'} })
     }
 
-
-    
     return (
         <Container>
             Página inexistente
