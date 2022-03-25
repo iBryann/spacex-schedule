@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { Home } from "./Home";
 import { Error } from "./Error";
-import { Header } from "../components/Header";
+import Header from "../components/Header2";
 
 const Router = () => {
     return (

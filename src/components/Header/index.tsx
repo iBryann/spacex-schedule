@@ -4,17 +4,27 @@ import { Link as LinkRouter } from "react-router-dom";
 import { Link } from "../Link";
 import { Container, HeaderMargin } from "./style";
 import Logo from '../../assets/imgs/logo.svg';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Header = () => {
     let showOverlay = true;
     let lastScrollY = 0;
+    let debounceScroll = 0;
 
-    window.addEventListener('scroll', (event: Event) => {
-        const e: Window = event.currentTarget as Window;
-        
-        console.log(e.screenY);
-    });
+    useEffect(() => {
+        window.addEventListener('scroll', (event: Event) => {
+            debounceScroll = setTimeout(() => {
+                clearTimeout(debounceScroll);
+                
+                const e = event.currentTarget as Window;
+                
+                if (e.scrollY !== lastScrollY) {
+                    console.log(e.scrollY, lastScrollY);
+                    lastScrollY = e.scrollY;
+                }
+            }, 1000);
+        });
+    }, []);
     
     return (
         <>
