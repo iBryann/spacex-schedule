@@ -4,7 +4,7 @@ export const HeaderMargin = styled.div`
     height: 100px;
 `;
 
-export const Container = styled.div<{show: boolean}>`
+export const Container = styled.div`
     position: fixed;
     top: 0;
     left: 0;
@@ -12,12 +12,28 @@ export const Container = styled.div<{show: boolean}>`
     width: 100%;
     height: 100px;
 
+    &.hidden {
+        .overlay {
+            transform: translateY(-110%);
+        }
+
+        #logo, #navigation {
+            opacity: 0;
+        }
+    }
+
     .overlay {
         position: absolute;
         width: 100%;
-        height: ${props => props.show ? 100 : 0}%;
+        height: 100%;
         background-color: #000;
-        transition: .4s ease-out;
+        transform: translateY(0);
+        transition: transform .4s ease-in-out;
+    }
+
+    #logo, #navigation {
+        opacity: 1;
+        transition: opacity .2s ease-in-out;
     }
 
     #logo {

@@ -1,34 +1,30 @@
-
+import { useEffect, useState } from "react";
 import { Link as LinkRouter } from "react-router-dom";
 
 import { Link } from "../Link";
 import { Container, HeaderMargin } from "./style";
 import Logo from '../../assets/imgs/logo.svg';
-import { useEffect, useState } from "react";
 
-export const Header = () => {
-    let showOverlay = true;
-    let lastScrollY = 0;
-    let debounceScroll = 0;
+import useDocumentScrollThrottled from './useDocumentScrollThrottled';
 
-    useEffect(() => {
-        window.addEventListener('scroll', (event: Event) => {
-            debounceScroll = setTimeout(() => {
-                clearTimeout(debounceScroll);
-                
-                const e = event.currentTarget as Window;
-                
-                if (e.scrollY !== lastScrollY) {
-                    console.log(e.scrollY, lastScrollY);
-                    lastScrollY = e.scrollY;
-                }
-            }, 1000);
-        });
-    }, []);
+export default function Header() {
+    const [headerState, setHeaderState] = useState(false);
+    const MINIMUM_SCROLL = 80;
+    const TIMEOUT_DELAY = 100;
+
+    useDocumentScrollThrottled(callbackData => {
+        const { previousScrollTop, currentScrollTop } = callbackData;
+        const isScrolledDown = previousScrollTop < currentScrollTop;
+        const isMinimumScrolled = currentScrollTop > MINIMUM_SCROLL;
+
+        setTimeout(() => {
+            setHeaderState(isScrolledDown && isMinimumScrolled);
+        }, TIMEOUT_DELAY);
+    });
     
     return (
         <>
-            <Container show={showOverlay}>
+            <Container className={`header ${headerState ? 'hidden' : ''}`}>
                 <div className="overlay active"></div>
                 
                 <div id="logo">

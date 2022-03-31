@@ -17,12 +17,9 @@ export const Style = createGlobalStyle`
         height: 86px;
         background-color: #fff;
         color: #333;
+        box-shadow: 0 9px 9px -9px rgba(0, 0, 0, 0.13);
         transform: translateY(0);
         transition: transform 0.3s ease;
-    }
-
-    .header.shadow {
-        box-shadow: 0 9px 9px -9px rgba(0, 0, 0, 0.13);
     }
 
     .header.hidden {
