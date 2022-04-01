@@ -5,7 +5,8 @@ import { Link } from "../Link";
 import { Container, HeaderMargin } from "./style";
 import Logo from '../../assets/imgs/logo.svg';
 
-import useDocumentScrollThrottled from './useDocumentScrollThrottled';
+import useDocumentScrollThrottled from '../../hooks/useDocumentScrollThrottled';
+
 
 export default function Header() {
     const [toggleMenu, setToggleMenu] = useState(false);
@@ -26,10 +27,11 @@ export default function Header() {
     return (
         <>
             <Container className={`header ${headerState ? 'hidden' : ''}`}>
-                <div className="overlay"></div>
+                <div className="header-overlay"></div>
+                <div className="body-overlay"></div>
 
                 <div className="logo">
-                    <LinkRouter to="/">
+                    <LinkRouter to="/" state={{nome: 'bryann'}}>
                         <img src={Logo} alt="SpaceX logo" />
                     </LinkRouter>
                 </div>

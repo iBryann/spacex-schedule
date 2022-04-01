@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import spacex from "../../api/spacex";
 import { ILaunch } from "../../utils/interfaces";
@@ -7,10 +8,13 @@ import { Style } from "./style";
 
 export const Home = () => {
     const [launches, setLaunches] = useState<ILaunch[]>([] as ILaunch[]);
+    const location = useLocation();
 
     useEffect(() => {
         spacex.get('/launches/past')
         .then(r => setLaunches(r.data));
+
+        console.log(location.state);
     }, []);
     
     return (

@@ -22,7 +22,7 @@ export const Container = styled.div`
     }
 
     &.hidden {
-        .overlay {
+        .header-overlay {
             transform: translateY(-110%);
         }
 
@@ -31,7 +31,7 @@ export const Container = styled.div`
         }
     }
 
-    .overlay {
+    .header-overlay {
         position: absolute;
         width: 100%;
         height: 100%;
@@ -40,11 +40,21 @@ export const Container = styled.div`
         transition: transform .4s ease-in-out;
     }
 
+    .body-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #0000ffa3;
+        transform: translateY(0);
+        transition: transform .4s ease-in-out;
+    }
+
     .logo, .nav-desktop {
         z-index: 1;
         opacity: 1;
         transition: opacity .2s ease-in-out;
-        border: 1px solid blue;
     }
 
     .logo {

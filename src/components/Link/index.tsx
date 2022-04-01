@@ -1,5 +1,4 @@
 
-import { ReactNode } from "react";
 import { Link as LinkRouter } from "react-router-dom";
 
 import { Container } from "./style";

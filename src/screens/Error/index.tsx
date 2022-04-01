@@ -10,7 +10,7 @@ const Error = () => {
     console.log(URLSearchParams(location));
 
     function gotoHome() {
-        navigate('/', { state: {nome: 'bryann'} })
+        navigate('/', { state: {nome: 'bryann'} });
     }
 
     return (
