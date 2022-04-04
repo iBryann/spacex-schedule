@@ -20,13 +20,22 @@ export const Container = styled.div`
             justify-content: flex-end;
         }
     }
+    @media (max-width: 767px) {
+        height: 60px;
+    }
 
     &.hidden {
         .header-overlay {
             transform: translateY(-110%);
         }
 
-        .logo, .nav-desktop {
+        @media (min-width: 768px) {
+            .logo, .wrapper-nav-mobile > button {
+                opacity: 0;
+            }
+        }
+
+        .nav-desktop {
             opacity: 0;
         }
     }
@@ -38,17 +47,14 @@ export const Container = styled.div`
         background-color: #000;
         transform: translateY(0);
         transition: transform .4s ease-in-out;
-    }
 
-    .body-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: #0000ffa3;
-        transform: translateY(0);
-        transition: transform .4s ease-in-out;
+        &.min-scroll {
+            transform: translateY(-110%);
+        }
+
+        @media (max-width: 767px) {
+            display: none;
+        }
     }
 
     .logo, .nav-desktop {
@@ -58,17 +64,25 @@ export const Container = styled.div`
     }
 
     .logo {
+        a {
+            img {
+                width: 210px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            a {
+                img {
+                    width: 150px;
+                }
+            }
+        }
+
         @media (min-width: 1100px) {
             position: absolute;
             top: 47%;
             left: 50px;
             transform: translateY(-50%);
-        }
-
-        a {
-            img {
-                width: 210px;
-            }
         }
     }
 
@@ -106,6 +120,50 @@ export const Container = styled.div`
     
     .wrapper-nav-mobile {
 
+        @media (min-width: 1100px) {
+            display: none;
+        }
+
+        &.show {
+            .body-overlay {
+                opacity: 1;
+                pointer-events: all;
+            }
+
+            .nav-mobile {
+                right: 0;
+                
+                li {
+                    &:nth-child(1) { animation: anim_menu_item .7s 0.80s ease-in-out forwards; }
+                    &:nth-child(2) { animation: anim_menu_item .7s 0.85s ease-in-out forwards; }
+                    &:nth-child(3) { animation: anim_menu_item .7s 0.90s ease-in-out forwards; }
+                    &:nth-child(4) { animation: anim_menu_item .7s 0.95s ease-in-out forwards; }
+                    &:nth-child(5) { animation: anim_menu_item .7s 1.00s ease-in-out forwards; }
+                    &:nth-child(6) { animation: anim_menu_item .7s 1.05s ease-in-out forwards; }
+                }
+                
+                @keyframes anim_menu_item {
+                    to {
+                        bottom: 0;
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+
+        .body-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            opacity: 0;
+            pointer-events: none;
+            background-color: rgba(0, 0, 0, .5);
+            transform: translateY(0);
+            transition: transform .4s ease-in-out, opacity 1s;
+        }
+
         button {
             z-index: 1;
             position: absolute;
@@ -117,6 +175,10 @@ export const Container = styled.div`
             background-color: transparent;
             transform: translateY(-50%);
             cursor: pointer;
+
+            @media (max-width: 767px) {
+                right: 20px;
+            }
             
             &.show > .menu {
                 .bar{
@@ -192,19 +254,31 @@ export const Container = styled.div`
             display: flex;
             transition: right 1s cubic-bezier(.65, .05, .36, 1);
 
-            &.show {
-                right: 0;
-            }
-
             ul {
                 width: 250px;
                 height: 100vh;
                 padding: 75px 50px 50px;
                 background-color: #000;
 
+                @media (max-width: 767px) {
+                    padding: 75px 20px 50px;
+                }
+
                 li {
+                    position: relative;
+                    bottom: -100px;
+                    opacity: 0;
                     text-align: right;
-                    border-bottom: 1pt solid #252525;
+                    border-bottom: 1px solid #252525;
+                    transition: 1s cubic-bezier(.25,1,.25,1);
+                    
+                    &:hover {
+                        border-bottom: 1px solid #fff;
+                        
+                        a {
+                            color: #8b939b;
+                        }
+                    }
                     
                     a {
                         display: block;
@@ -217,11 +291,7 @@ export const Container = styled.div`
                         text-decoration: none;
                         white-space: nowrap;
                         padding: 0;
-                        transition: color 1s cubic-bezier(.25,1,.25,1);
-
-                        &:hover {
-                            color: #8b939b;
-                        }
+                        transition: 1s cubic-bezier(.25,1,.25,1);
                     }
                 }
             }

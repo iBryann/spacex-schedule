@@ -11,24 +11,23 @@ import useDocumentScrollThrottled from '../../hooks/useDocumentScrollThrottled';
 export default function Header() {
     const [toggleMenu, setToggleMenu] = useState(false);
     const [headerState, setHeaderState] = useState(false);
-    const MINIMUM_SCROLL = 80;
-    const TIMEOUT_DELAY = 100;
+    const [overlayState, setOverlayState] = useState(false);
 
     useDocumentScrollThrottled(callbackData => {
-        const { previousScrollTop, currentScrollTop } = callbackData;
+        const { previousScrollTop, currentScrollTop, clientHeight } = callbackData;
         const isScrolledDown = previousScrollTop < currentScrollTop;
-        const isMinimumScrolled = currentScrollTop > MINIMUM_SCROLL;
+        const isMinimumScrolled = currentScrollTop > clientHeight;
 
         setTimeout(() => {
+            setOverlayState(currentScrollTop < clientHeight);
             setHeaderState(isScrolledDown && isMinimumScrolled);
-        }, TIMEOUT_DELAY);
+        }, 100);
     });
 
     return (
         <>
-            <Container className={`header ${headerState ? 'hidden' : ''}`}>
-                <div className="header-overlay"></div>
-                <div className="body-overlay"></div>
+            <Container className={`header ${(headerState && !toggleMenu) && 'hidden'}  `}>
+                <div className={`header-overlay ${overlayState && 'min-scroll'}`}></div>
 
                 <div className="logo">
                     <LinkRouter to="/" state={{nome: 'bryann'}}>
@@ -46,8 +45,13 @@ export default function Header() {
                         <li><Link to="/" text="RIDESHARE" /></li>
                     </ul>
                 </nav>
+                
+                <div className={`wrapper-nav-mobile ${toggleMenu && 'show'}`}>
+                    <div
+                        className="body-overlay"
+                        onClick={() => setToggleMenu(v => !v)}
+                    ></div>
 
-                <div className="wrapper-nav-mobile">
                     <button
                         className={toggleMenu ? 'show' : ''}
                         onClick={() => setToggleMenu(v => !v)}

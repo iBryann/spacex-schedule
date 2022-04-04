@@ -3,7 +3,8 @@ import { throttle } from 'lodash';
 
 interface IProps {
     previousScrollTop: number,
-    currentScrollTop: number
+    currentScrollTop: number,
+    clientHeight: number
 }
 
 export default function useDocumentScrollThrottled(callback: ({}: IProps) => void) {
@@ -11,14 +12,14 @@ export default function useDocumentScrollThrottled(callback: ({}: IProps) => voi
     let previousScrollTop = 0;
 
     function handleDocumentScroll() {
-        const { scrollTop: currentScrollTop } = document.documentElement || document.body;
+        const { scrollTop: currentScrollTop, clientHeight } = document.documentElement || document.body;
 
         setScrollPosition(previousPosition => {
             previousScrollTop = previousPosition;
             return currentScrollTop;
         });
 
-        callback({ previousScrollTop, currentScrollTop });
+        callback({ previousScrollTop, currentScrollTop, clientHeight });
     }
 
     const handleDocumentScrollThrottled = throttle(handleDocumentScroll, 250);

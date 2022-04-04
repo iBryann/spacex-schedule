@@ -20,8 +20,11 @@ export const Home = () => {
     return (
         <div>
             <Style />
-
-            Home
+            
+            <section>Home 1</section>
+            <section>Home 2</section>
+            <section>Home 3</section>
+            <section>Home 4</section>
             
             {
             // launches.slice(30, 40).map(launch =><LaunchCard launch={launch} key={launch.id} />)
