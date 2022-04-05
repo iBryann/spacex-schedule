@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Link as LinkRouter } from "react-router-dom";
 
 import { Link } from "../Link";
@@ -8,7 +8,12 @@ import Logo from '../../assets/imgs/logo.svg';
 import useDocumentScrollThrottled from '../../hooks/useDocumentScrollThrottled';
 
 
-export default function Header() {
+/*
+    1. Fechar menu ao clicar em link
+    2. Mostrar um loader ou fade na transição
+*/
+
+const Header = () => {
     const [toggleMenu, setToggleMenu] = useState(false);
     const [headerState, setHeaderState] = useState(false);
     const [overlayState, setOverlayState] = useState(false);
@@ -26,6 +31,8 @@ export default function Header() {
 
     return (
         <>
+            <HeaderMargin />
+
             <Container className={`header ${(headerState && !toggleMenu) && 'hidden'}  `}>
                 <div className={`header-overlay ${overlayState && 'min-scroll'}`}></div>
 
@@ -75,10 +82,9 @@ export default function Header() {
                         </ul>
                     </nav>
                 </div>
-
             </Container>
-
-            <HeaderMargin />
         </>
     );
 };
+
+export default memo(Header);
