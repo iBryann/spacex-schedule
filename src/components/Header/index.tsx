@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-import { Link as LinkRouter } from "react-router-dom";
+import { Link as LinkRouter, useNavigate } from "react-router-dom";
 
 import { Link } from "../Link";
 import { Container, HeaderMargin } from "./style";
@@ -8,15 +8,20 @@ import Logo from '../../assets/imgs/logo.svg';
 import useDocumentScrollThrottled from '../../hooks/useDocumentScrollThrottled';
 
 
-/*
-    1. Fechar menu ao clicar em link
-    2. Mostrar um loader ou fade na transição
-*/
-
 const Header = () => {
+    const navigate = useNavigate();
     const [toggleMenu, setToggleMenu] = useState(false);
     const [headerState, setHeaderState] = useState(false);
     const [overlayState, setOverlayState] = useState(false);
+    const [transitioning, setTransitioning] = useState(false);
+    const menuLinks = [
+        {to: '/', text: 'FALCON 9'},
+        {to: '/about', text: 'FALCON HEAVY'},
+        {to: '/users', text: 'DRAGON'},
+        {to: '/error', text: 'STARSHIP'},
+        {to: '/', text: 'HUMAN SPACEFLIGHT'},
+        {to: '/', text: 'RIDESHARE'},
+    ];
 
     useDocumentScrollThrottled(callbackData => {
         const { previousScrollTop, currentScrollTop, clientHeight } = callbackData;
@@ -29,11 +34,21 @@ const Header = () => {
         }, 100);
     });
 
+    function navigateTo(to = '/') {
+        setToggleMenu(false);
+        setTransitioning(true);
+
+        setTimeout(() => {
+            navigate(to);
+            setTransitioning(false);
+        }, 800);
+    }
+
     return (
         <>
             <HeaderMargin />
 
-            <Container className={`header ${(headerState && !toggleMenu) && 'hidden'}  `}>
+            <Container className={`header ${(headerState && !toggleMenu) && 'hidden'} ${transitioning && 'transitioning'}  `}>
                 <div className={`header-overlay ${overlayState && 'min-scroll'}`}></div>
 
                 <div className="logo">
@@ -44,22 +59,19 @@ const Header = () => {
 
                 <nav className="nav-desktop">
                     <ul>
-                        <li><Link to="/" text="FALCON 9" /></li>
-                        <li><Link to="/about" text="FALCON HEAVY" /></li>
-                        <li><Link to="/users" text="DRAGON" /></li>
-                        <li><Link to="/error" text="STARSHIP" /></li>
-                        <li><Link to="/" text="HUMAN SPACEFLIGHT" /></li>
-                        <li><Link to="/" text="RIDESHARE" /></li>
+                        {menuLinks.map(link =>
+                            <li key={link.text}>
+                                <Link onClick={() => navigateTo(link.to)} text={link.text} />
+                            </li>
+                        )}
                     </ul>
                 </nav>
                 
                 <div className={`wrapper-nav-mobile ${toggleMenu && 'show'}`}>
-                    <div
-                        className="body-overlay"
-                        onClick={() => setToggleMenu(v => !v)}
-                    ></div>
+                    <div className="body-overlay" onClick={() => setToggleMenu(v => !v)}></div>
 
                     <button
+                        id="btn-menu"
                         className={toggleMenu ? 'show' : ''}
                         onClick={() => setToggleMenu(v => !v)}
                         type="button"
@@ -73,12 +85,11 @@ const Header = () => {
 
                     <nav className={`nav-mobile ${toggleMenu && 'show'}`}>
                         <ul>
-                            <li><LinkRouter to="/">FALCON 9</LinkRouter></li>
-                            <li><LinkRouter to="/about">FALCON HEAVY</LinkRouter></li>
-                            <li><LinkRouter to="/users">DRAGON</LinkRouter></li>
-                            <li><LinkRouter to="/error">STARSHIP</LinkRouter></li>
-                            <li><LinkRouter to="/">HUMAN SPACEFLIGHT</LinkRouter></li>
-                            <li><LinkRouter to="/">RIDESHARE</LinkRouter></li>
+                            {menuLinks.map(link =>
+                                <li key={link.text}>
+                                    <button onClick={() => navigateTo(link.to)}>{link.text}</button>
+                                </li>
+                            )}
                         </ul>
                     </nav>
                 </div>

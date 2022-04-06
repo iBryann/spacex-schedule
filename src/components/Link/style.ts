@@ -3,11 +3,14 @@ import styled from 'styled-components';
 export const Container = styled.div`
     display: inline;
 
-    a {
+    button {
         position: relative;
         display: inline-block;
         padding: 4px 0;
         text-decoration: none;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
 
         .text {
             position: relative;

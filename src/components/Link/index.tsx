@@ -1,22 +1,20 @@
 
-import { Link as LinkRouter } from "react-router-dom";
-
+import { ButtonHTMLAttributes } from "react";
 import { Container } from "./style";
 
 
-interface IProps {
-    to: string,
+interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     text: string
 }
 
-export const Link = ({ to, text, ...rest }: IProps) => {
+export const Link = ({ text, ...rest }: IProps) => {
     
     return (
         <Container>
-            <LinkRouter to={to} {...rest}>
+            <button {...rest}>
                 <div className="hover"></div>
                 <div className="text">{text}</div>
-            </LinkRouter>
+            </button>
         </Container>
     );
 };

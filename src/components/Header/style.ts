@@ -4,7 +4,7 @@ export const HeaderMargin = styled.div`
     height: 100px;
 `;
 
-export const Container = styled.div`
+export const Container = styled.header`
     position: fixed;
     top: 0;
     left: 0;
@@ -22,6 +22,23 @@ export const Container = styled.div`
     }
     @media (max-width: 767px) {
         height: 60px;
+    }
+
+    &:after {
+        content: '';
+        z-index: 1;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: transparent;
+        transition: 1s background-color;
+        pointer-events: none;
+    }
+
+    &.transitioning:after {
+        background-color: #000;
     }
 
     &.hidden {
@@ -164,7 +181,7 @@ export const Container = styled.div`
             transition: transform .4s ease-in-out, opacity 1s;
         }
 
-        button {
+        #btn-menu {
             z-index: 1;
             position: absolute;
             top: 50%;
@@ -275,23 +292,28 @@ export const Container = styled.div`
                     &:hover {
                         border-bottom: 1px solid #fff;
                         
-                        a {
+                        button {
                             color: #8b939b;
                         }
                     }
                     
-                    a {
+                    button {
                         display: block;
+                        width: 100%;
                         color: #fff;
                         font-family: sans-serif;
                         font-size: 15px;
                         font-weight: 300;
                         line-height: 40px;
+                        text-align: right;
+                        background-color: transparent;
+                        border: none;
                         text-transform: uppercase;
                         text-decoration: none;
                         white-space: nowrap;
                         padding: 0;
                         transition: 1s cubic-bezier(.25,1,.25,1);
+                        cursor: pointer;
                     }
                 }
             }
