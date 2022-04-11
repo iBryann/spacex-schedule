@@ -1,0 +1,15 @@
+export enum ORBIT {
+    PO = 'Polar orbit',
+    SO = 'Sun-synchronous orbit',
+    SSO = 'Sun-synchronous orbit',
+    LEO = 'Low Earth orbit',
+    ISS = 'International Space Station',
+    GTO = 'Geostationary transfer orbit',
+    HCO = 'Heliocentric orbit',
+    HEO = 'Highly elliptical orbit',
+    MEO = 'Medium Earth orbit',
+    GEO = 'Geostationary orbit',
+    TLI = 'Trans-lunar injection',
+    VLEO = 'Very low Earth orbit',
+    'ES-L1' = 'Lagrange point 1',
+}
