@@ -10,3 +10,5 @@ ReactDOM.render(
     </StrictMode>,
     document.getElementById('root')
 );
+
+alert(import.meta.env.VITE_SOME_KEY);

@@ -12,4 +12,15 @@ export enum ORBIT {
     TLI = 'Trans-lunar injection',
     VLEO = 'Very low Earth orbit',
     'ES-L1' = 'Lagrange point 1',
+    'ES-L2' = 'Lagrange point 2',
+    'ES-L3' = 'Lagrange point 3',
+    'ES-L4' = 'Lagrange point 4',
+    'ES-L5' = 'Lagrange point 5',
+}
+
+
+export enum LANDINGTYPE {
+    ASDS = 'Autonomous spaceport drone ship',
+    Ocean = 'Ocean',
+    RTLS = 'Return to launch site',
 }
