@@ -2,7 +2,7 @@ import { memo, useState } from "react";
 import { Link as LinkRouter, useNavigate } from "react-router-dom";
 
 import { Link } from "../Link";
-import { Container, HeaderMargin } from "./style";
+import { Container } from "./style";
 import Logo from '../../assets/imgs/logo.svg';
 
 import useDocumentScrollThrottled from '../../hooks/useDocumentScrollThrottled';
@@ -46,8 +46,6 @@ const Header = () => {
 
     return (
         <>
-            <HeaderMargin />
-
             <Container className={`header ${(headerState && !toggleMenu) && 'hidden'} ${transitioning && 'transitioning'}  `}>
                 <div className={`header-overlay ${overlayState && 'min-scroll'}`}></div>
 

@@ -1,57 +1,53 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { SmoothProvider } from 'react-smooth-scrolling'
-
-import spacex from "../../api/spacex";
-import { ILaunch } from "../../utils/interfaces";
-
 import { Style } from "./style";
 
+import { Button } from "../../components/Button";
+import { Title } from "../../components/Title";
+
 export const Home = () => {
-    const [launches, setLaunches] = useState<ILaunch[]>([] as ILaunch[]);
-    const location = useLocation();
-
-    useEffect(() => {
-        spacex.get('/launches/past')
-            .then(r => setLaunches(r.data));
-
-        console.log(location.state);
-    }, []);
 
     return (
-        <div>
+        <>
             <Style />
 
-            <SmoothProvider skew={true} ease={0.01}>
-                <section>Home 1</section>
-                <section>Home 2</section>
-                <section>Home 3</section>
-                <section>Home 4</section>
-            </SmoothProvider>
+            <section className="block-1">
+                <div className="block-1__wrapper">
+                    <div className="block-1__label">UPCOMING LAUNCH</div>
+                    <div className="block-1__title">Ax-1 Mission</div>
+                    <div className="block-1__timeout">T- 00:02:13:58</div>
+                    <Button onClick={() => alert(123)} text="Learn More" />
+                </div>
+            </section>
 
-            {
-                // launches.slice(30, 40).map(launch =><LaunchCard launch={launch} key={launch.id} />)
-            }
+            <section className="block-2">
+                <div className="block-2__wrapper">
+                    <div className="block-2__quantity">146</div>
+                    <div className="block-2__label">TOTAL LAUNCHES</div>
+                </div>
+                <div className="block-2__wrapper">
+                    <div className="block-2__quantity">106</div>
+                    <div className="block-2__label">TOTAL LANDINGS</div>
+                </div>
+                <div className="block-2__wrapper">
+                    <div className="block-2__quantity">86</div>
+                    <div className="block-2__label">REFLOWN ROCKETS</div>
+                </div>
+            </section>
 
-        </div>
+            <section className="block-3">
+                <div className="goto-down">
+                    <a href="">
+                        <svg width="22" height="13" viewBox="0 0 22 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1.59082L11 12.3545L21 1.59082" stroke="white" stroke-linecap="square" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+
+                <Title>Upcoming<br/>Missions</Title>
+
+                <table>
+
+                </table>
+            </section>
+        </>
     );
 };
-
-const LaunchCard = ({ launch }: { launch: ILaunch }) => (
-    <div>
-        <h2>{launch.name}</h2>
-        <h3>{launch.details}</h3>
-
-        <div>
-            {launch.links.flickr.original.slice(0, 1).map(link =>
-                <img
-                    src={link}
-                    style={{ width: 300 }}
-                    loading="lazy"
-                    key={link}
-                />
-            )}
-        </div>
-        <hr />
-    </div>
-);

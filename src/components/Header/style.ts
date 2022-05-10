@@ -1,9 +1,5 @@
 import styled from 'styled-components';
 
-export const HeaderMargin = styled.div`
-    height: 100px;
-`;
-
 export const Container = styled.header`
     position: fixed;
     top: 0;

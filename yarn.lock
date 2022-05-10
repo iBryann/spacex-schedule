@@ -862,11 +862,6 @@ react-router@6.2.2:
   dependencies:
     history "^5.2.0"
 
-react-smooth-scrolling@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-smooth-scrolling/-/react-smooth-scrolling-1.0.2.tgz#6ce393c336412b8f2328e456c64fc2f49a2b77c7"
-  integrity sha512-AAkPQDLeVtLL92E0iyE86oj7ASSKE5L0mIqSeT19FXHT13/N+9Yxpf1VFKhN49BDJ60zE35nru0VjbDpmbDXNA==
-
 react@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
